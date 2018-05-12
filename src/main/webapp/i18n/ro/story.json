@@ -1,0 +1,28 @@
+
+{
+    "democaipApp": {
+        "story" : {
+            "home": {
+                "title": "Stories",
+                "createLabel": "Creeare o nouă entitate Story",
+                "createOrEditLabel": "Creeare sau editare Story"
+            },
+            "created": "A fost creată o nouă entitate Story cu identificatorul {{ param }}",
+            "updated": "Story cu identificatorul {{ param }} a fost actualizată",
+            "deleted": "Story cu identificatorul {{ param }} a fost ștearsă",
+            "delete": {
+                "question": "Sunteți sigur că doriți să ștergeți Story {{ id }}?"
+            },
+            "detail": {
+                "title": "Story"
+            },
+            "name": "Name",
+            "description": "Description",
+            "creation": "Creation",
+            "storyPoint": "Story Point",
+            "tasks": "Tasks",
+            "owner": "Owner",
+            "epic": "Epic"
+        }
+    }
+}

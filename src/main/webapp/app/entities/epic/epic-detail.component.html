@@ -1,0 +1,48 @@
+
+<div *ngIf="epic">
+    <h2><span jhiTranslate="democaipApp.epic.detail.title">Epic</span> {{epic.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="democaipApp.epic.name">Name</span></dt>
+        <dd>
+            <span>{{epic.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="democaipApp.epic.description">Description</span></dt>
+        <dd>
+            <span>{{epic.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="democaipApp.epic.creation">Creation</span></dt>
+        <dd>
+            <span>{{epic.creation | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="democaipApp.epic.size">Size</span></dt>
+        <dd>
+            <span jhiTranslate="{{'democaipApp.EpicSize.' + epic.size}}">{{epic.size}}</span>
+        </dd>
+        <dt><span jhiTranslate="democaipApp.epic.owner">Owner</span></dt>
+        <dd>
+            {{epic.owner?.id}}
+        </dd>
+        <dt><span jhiTranslate="democaipApp.epic.project">Project</span></dt>
+        <dd>
+            <div *ngIf="epic.project">
+                <a [routerLink]="['/project', epic.project?.id]">{{epic.project?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'epic/'+ epic.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

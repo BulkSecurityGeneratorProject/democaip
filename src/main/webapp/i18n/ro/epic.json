@@ -1,0 +1,28 @@
+
+{
+    "democaipApp": {
+        "epic" : {
+            "home": {
+                "title": "Epics",
+                "createLabel": "Creeare o nouă entitate Epic",
+                "createOrEditLabel": "Creeare sau editare Epic"
+            },
+            "created": "A fost creată o nouă entitate Epic cu identificatorul {{ param }}",
+            "updated": "Epic cu identificatorul {{ param }} a fost actualizată",
+            "deleted": "Epic cu identificatorul {{ param }} a fost ștearsă",
+            "delete": {
+                "question": "Sunteți sigur că doriți să ștergeți Epic {{ id }}?"
+            },
+            "detail": {
+                "title": "Epic"
+            },
+            "name": "Name",
+            "description": "Description",
+            "creation": "Creation",
+            "size": "Size",
+            "stories": "Stories",
+            "owner": "Owner",
+            "project": "Project"
+        }
+    }
+}

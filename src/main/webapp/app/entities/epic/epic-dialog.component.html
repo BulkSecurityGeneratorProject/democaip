@@ -1,0 +1,71 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myEpicLabel" jhiTranslate="democaipApp.epic.home.createOrEditLabel">Create or edit a Epic</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!epic.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="epic.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="democaipApp.epic.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="epic.name" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="democaipApp.epic.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="epic.description" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="democaipApp.epic.creation" for="field_creation">Creation</label>
+            <div class="input-group">
+                <input id="field_creation" type="text" class="form-control" name="creation" ngbDatepicker  #creationDp="ngbDatepicker" [(ngModel)]="epic.creation"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="creationDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="democaipApp.epic.size" for="field_size">Size</label>
+            <select class="form-control" name="size" [(ngModel)]="epic.size" id="field_size" >
+                <option value="XXS">{{'democaipApp.EpicSize.XXS' | translate}}</option>
+                <option value="XS">{{'democaipApp.EpicSize.XS' | translate}}</option>
+                <option value="S">{{'democaipApp.EpicSize.S' | translate}}</option>
+                <option value="M">{{'democaipApp.EpicSize.M' | translate}}</option>
+                <option value="L">{{'democaipApp.EpicSize.L' | translate}}</option>
+                <option value="XL">{{'democaipApp.EpicSize.XL' | translate}}</option>
+                <option value="XXL">{{'democaipApp.EpicSize.XXL' | translate}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="democaipApp.epic.owner" for="field_owner">Owner</label>
+            <select class="form-control" id="field_owner" name="owner" [(ngModel)]="epic.owner" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userOption.id === epic.owner?.id ? epic.owner : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="democaipApp.epic.project" for="field_project">Project</label>
+            <select class="form-control" id="field_project" name="project" [(ngModel)]="epic.project" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="projectOption.id === epic.project?.id ? epic.project : projectOption" *ngFor="let projectOption of projects; trackBy: trackProjectById">{{projectOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

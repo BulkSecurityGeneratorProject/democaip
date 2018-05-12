@@ -1,0 +1,48 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "stories",
+            "otherEntityName": "story",
+            "otherEntityRelationshipName": "epic"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "owner",
+            "otherEntityName": "user",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "project",
+            "otherEntityName": "project",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "creation",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "size",
+            "fieldType": "EpicSize",
+            "fieldValues": "XXS,XS,S,M,L,XL,XXL"
+        }
+    ],
+    "changelogDate": "20180506162648",
+    "entityTableName": "epic",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

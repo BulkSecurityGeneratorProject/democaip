@@ -1,0 +1,19 @@
+{
+    "home": {
+        "title": "eWork",
+        "subtitle": "This is eWork app a task manager for your business",
+        "logged": {
+            "message": "You are logged in as user \"{{username}}\"."
+        },
+        "question": "How to use eWork platform",
+        "link": {
+            "homepage": "JHipster homepage",
+            "stackoverflow": "JHipster on Stack Overflow",
+            "bugtracker": "JHipster bug tracker",
+            "chat": "JHipster public chat room",
+            "follow": "follow @java_hipster on Twitter"
+        },
+        "like": "If you like JHipster, don't forget to give us a star on",
+        "github": "GitHub"
+    }
+}

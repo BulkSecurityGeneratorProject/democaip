@@ -1,0 +1,59 @@
+
+enum EpicSize {
+    XXS, XS, S, M, L, XL, XXL
+}
+
+enum TaskStatus {
+    OPEN,
+    IN_PROGRES,
+    DONE
+}
+
+entity Project {
+    name String,
+    description String,
+    creation LocalDate
+  }
+
+entity Epic {
+    name String,
+    description String,
+    creation LocalDate,
+    size EpicSize
+}
+
+entity Story {
+    name String,
+    description String,
+    creation LocalDate,
+    storyPoint Integer
+}
+
+entity Task {
+    name String,
+    description String,
+    creation LocalDate,
+    duration Integer,
+    status TaskStatus
+}
+
+
+
+relationship OneToMany {
+    Project{epics} to Epic{project},
+    Epic{stories} to Story{epic},
+    Story{tasks} to Task{story}
+}
+
+
+relationship ManyToOne {
+    Project{owner} to User,
+    Epic{owner} to User,
+    Story{owner} to User,
+    Task{assigner} to User,
+    Task{assignee} to User
+}
+
+
+
+service all with serviceImpl

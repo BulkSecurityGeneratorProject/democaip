@@ -1,0 +1,11 @@
+version: '2'
+services:
+    democaip-postgresql:
+        image: postgres:9.6.5
+        # volumes:
+        #     - ~/volumes/jhipster/democaip/postgresql/:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_USER=democaip
+            - POSTGRES_PASSWORD=democaip
+        ports:
+            - 5432:5432

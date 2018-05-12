@@ -1,0 +1,11 @@
+Development
+    docker-compose -f src/main/docker/postgresql.yml up
+    npm install
+    mvnw
+    npm start
+
+Production
+    mvnw package -Pprod dockerfile:build
+    docker-compose -f src/main/docker/app.yml up
+
+
