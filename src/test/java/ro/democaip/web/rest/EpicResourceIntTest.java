@@ -5,6 +5,7 @@ import ro.democaip.DemocaipApp;
 import ro.democaip.domain.Epic;
 import ro.democaip.repository.EpicRepository;
 import ro.democaip.service.EpicService;
+import ro.democaip.service.UserService;
 import ro.democaip.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -33,6 +34,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import ro.democaip.domain.enumeration.EpicSize;
+
 /**
  * Test class for the EpicResource REST controller.
  *
@@ -75,11 +77,13 @@ public class EpicResourceIntTest {
     private MockMvc restEpicMockMvc;
 
     private Epic epic;
+    @Autowired
+    private UserService userService;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final EpicResource epicResource = new EpicResource(epicService);
+        final EpicResource epicResource = new EpicResource(epicService, userService);
         this.restEpicMockMvc = MockMvcBuilders.standaloneSetup(epicResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -89,7 +93,7 @@ public class EpicResourceIntTest {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */

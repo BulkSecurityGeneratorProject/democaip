@@ -1,14 +1,17 @@
 package ro.democaip.service.impl;
 
-import ro.democaip.service.ProjectService;
-import ro.democaip.domain.Project;
-import ro.democaip.repository.ProjectRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ro.democaip.domain.Project;
+import ro.democaip.domain.User;
+import ro.democaip.repository.ProjectRepository;
+import ro.democaip.service.ProjectService;
+import ro.democaip.service.UserService;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Service Implementation for managing Project.
@@ -20,9 +23,11 @@ public class ProjectServiceImpl implements ProjectService {
     private final Logger log = LoggerFactory.getLogger(ProjectServiceImpl.class);
 
     private final ProjectRepository projectRepository;
+    private final UserService userService;
 
-    public ProjectServiceImpl(ProjectRepository projectRepository) {
+    public ProjectServiceImpl(ProjectRepository projectRepository, UserService userService) {
         this.projectRepository = projectRepository;
+        this.userService = userService;
     }
 
     /**
@@ -71,5 +76,16 @@ public class ProjectServiceImpl implements ProjectService {
     public void delete(Long id) {
         log.debug("Request to delete Project : {}", id);
         projectRepository.delete(id);
+    }
+
+    @Override
+    public List<Project> getAllByOwner() {
+        Optional<User> user = userService.getUserWithAuthorities();
+
+        if (!user.isPresent()) {
+            log.error("Eroare mare");
+        }
+
+        return projectRepository.getAllByOwner(user.get());
     }
 }

@@ -22,24 +22,6 @@
             <input type="text" class="form-control" name="description" id="field_description"
                 [(ngModel)]="project.description" />
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="democaipApp.project.creation" for="field_creation">Creation</label>
-            <div class="input-group">
-                <input id="field_creation" type="text" class="form-control" name="creation" ngbDatepicker  #creationDp="ngbDatepicker" [(ngModel)]="project.creation"
-                />
-                <span class="input-group-append">
-                    <button type="button" class="btn btn-secondary" (click)="creationDp.toggle()"><i class="fa fa-calendar"></i></button>
-                </span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="democaipApp.project.owner" for="field_owner">Owner</label>
-            <select class="form-control" id="field_owner" name="owner" [(ngModel)]="project.owner" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="userOption.id === project.owner?.id ? project.owner : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
-            </select>
-        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

@@ -5,6 +5,7 @@ import ro.democaip.DemocaipApp;
 import ro.democaip.domain.Project;
 import ro.democaip.repository.ProjectRepository;
 import ro.democaip.service.ProjectService;
+import ro.democaip.service.UserService;
 import ro.democaip.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -72,10 +73,13 @@ public class ProjectResourceIntTest {
 
     private Project project;
 
+    @Autowired
+    private UserService userService;
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ProjectResource projectResource = new ProjectResource(projectService);
+        final ProjectResource projectResource = new ProjectResource(projectService, userService);
         this.restProjectMockMvc = MockMvcBuilders.standaloneSetup(projectResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

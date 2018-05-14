@@ -26,16 +26,16 @@
         </dd>
         <dt><span jhiTranslate="democaipApp.task.assigner">Assigner</span></dt>
         <dd>
-            {{task.assigner?.id}}
+            {{task.assigner?.login}}
         </dd>
         <dt><span jhiTranslate="democaipApp.task.assignee">Assignee</span></dt>
         <dd>
-            {{task.assignee?.id}}
+            {{task.assignee?.login}}
         </dd>
         <dt><span jhiTranslate="democaipApp.task.story">Story</span></dt>
         <dd>
             <div *ngIf="task.story">
-                <a [routerLink]="['/story', task.story?.id]">{{task.story?.id}}</a>
+                <a [routerLink]="['/story', task.story?.id]">{{task.story?.name}}</a>
             </div>
         </dd>
     </dl>

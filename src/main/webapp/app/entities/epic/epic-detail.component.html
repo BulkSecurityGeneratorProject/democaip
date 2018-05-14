@@ -22,12 +22,12 @@
         </dd>
         <dt><span jhiTranslate="democaipApp.epic.owner">Owner</span></dt>
         <dd>
-            {{epic.owner?.id}}
+            {{epic.owner?.login}}
         </dd>
         <dt><span jhiTranslate="democaipApp.epic.project">Project</span></dt>
         <dd>
             <div *ngIf="epic.project">
-                <a [routerLink]="['/project', epic.project?.id]">{{epic.project?.id}}</a>
+                <a [routerLink]="['/project', epic.project?.id]">{{epic.project?.name}}</a>
             </div>
         </dd>
     </dl>

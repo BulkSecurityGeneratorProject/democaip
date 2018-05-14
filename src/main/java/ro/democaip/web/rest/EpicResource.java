@@ -3,6 +3,7 @@ package ro.democaip.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import ro.democaip.domain.Epic;
 import ro.democaip.service.EpicService;
+import ro.democaip.service.UserService;
 import ro.democaip.web.rest.errors.BadRequestAlertException;
 import ro.democaip.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,9 +31,11 @@ public class EpicResource {
     private static final String ENTITY_NAME = "epic";
 
     private final EpicService epicService;
+    private final UserService userService;
 
-    public EpicResource(EpicService epicService) {
+    public EpicResource(EpicService epicService, UserService userService) {
         this.epicService = epicService;
+        this.userService = userService;
     }
 
     /**
@@ -48,6 +52,10 @@ public class EpicResource {
         if (epic.getId() != null) {
             throw new BadRequestAlertException("A new epic cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        epic.setCreation(LocalDate.now());
+        userService.getUserWithAuthorities().ifPresent(epic::setOwner);
+
         Epic result = epicService.save(epic);
         return ResponseEntity.created(new URI("/api/epics/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

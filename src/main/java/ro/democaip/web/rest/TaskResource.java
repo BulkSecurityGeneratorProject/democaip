@@ -1,8 +1,10 @@
+
 package ro.democaip.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import ro.democaip.domain.Task;
 import ro.democaip.service.TaskService;
+import ro.democaip.service.UserService;
 import ro.democaip.web.rest.errors.BadRequestAlertException;
 import ro.democaip.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,9 +32,11 @@ public class TaskResource {
     private static final String ENTITY_NAME = "task";
 
     private final TaskService taskService;
+    private final UserService userService;
 
-    public TaskResource(TaskService taskService) {
+    public TaskResource(TaskService taskService, UserService userService) {
         this.taskService = taskService;
+        this.userService = userService;
     }
 
     /**
@@ -48,6 +53,10 @@ public class TaskResource {
         if (task.getId() != null) {
             throw new BadRequestAlertException("A new task cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        task.creation(LocalDate.now());
+        userService.getUserWithAuthorities().ifPresent(task::assigner);
+
         Task result = taskService.save(task);
         return ResponseEntity.created(new URI("/api/tasks/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

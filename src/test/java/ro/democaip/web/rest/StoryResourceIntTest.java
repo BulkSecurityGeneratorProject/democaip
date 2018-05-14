@@ -5,6 +5,7 @@ import ro.democaip.DemocaipApp;
 import ro.democaip.domain.Story;
 import ro.democaip.repository.StoryRepository;
 import ro.democaip.service.StoryService;
+import ro.democaip.service.UserService;
 import ro.democaip.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -74,11 +75,13 @@ public class StoryResourceIntTest {
     private MockMvc restStoryMockMvc;
 
     private Story story;
+    @Autowired
+    private UserService userService;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final StoryResource storyResource = new StoryResource(storyService);
+        final StoryResource storyResource = new StoryResource(storyService, userService);
         this.restStoryMockMvc = MockMvcBuilders.standaloneSetup(storyResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

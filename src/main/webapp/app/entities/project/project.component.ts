@@ -25,7 +25,7 @@ projects: Project[];
     }
 
     loadAll() {
-        this.projectService.query().subscribe(
+        this.projectService.findByOwner().subscribe(
             (res: HttpResponse<Project[]>) => {
                 this.projects = res.body;
             },

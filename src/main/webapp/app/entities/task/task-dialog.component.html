@@ -23,16 +23,6 @@
                 [(ngModel)]="task.description" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="democaipApp.task.creation" for="field_creation">Creation</label>
-            <div class="input-group">
-                <input id="field_creation" type="text" class="form-control" name="creation" ngbDatepicker  #creationDp="ngbDatepicker" [(ngModel)]="task.creation"
-                />
-                <span class="input-group-append">
-                    <button type="button" class="btn btn-secondary" (click)="creationDp.toggle()"><i class="fa fa-calendar"></i></button>
-                </span>
-            </div>
-        </div>
-        <div class="form-group">
             <label class="form-control-label" jhiTranslate="democaipApp.task.duration" for="field_duration">Duration</label>
             <input type="number" class="form-control" name="duration" id="field_duration"
                 [(ngModel)]="task.duration" />
@@ -47,24 +37,17 @@
         </div>
 
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="democaipApp.task.assigner" for="field_assigner">Assigner</label>
-            <select class="form-control" id="field_assigner" name="assigner" [(ngModel)]="task.assigner" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="userOption.id === task.assigner?.id ? task.assigner : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
-            </select>
-        </div>
-        <div class="form-group">
             <label class="form-control-label" jhiTranslate="democaipApp.task.assignee" for="field_assignee">Assignee</label>
             <select class="form-control" id="field_assignee" name="assignee" [(ngModel)]="task.assignee" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="userOption.id === task.assignee?.id ? task.assignee : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+                <option [ngValue]="userOption.id === task.assignee?.id ? task.assignee : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
             </select>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="democaipApp.task.story" for="field_story">Story</label>
             <select class="form-control" id="field_story" name="story" [(ngModel)]="task.story" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="storyOption.id === task.story?.id ? task.story : storyOption" *ngFor="let storyOption of stories; trackBy: trackStoryById">{{storyOption.id}}</option>
+                <option [ngValue]="storyOption.id === task.story?.id ? task.story : storyOption" *ngFor="let storyOption of stories; trackBy: trackStoryById">{{storyOption.name}}</option>
             </select>
         </div>
     </div>

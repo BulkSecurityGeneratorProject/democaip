@@ -3,6 +3,7 @@ package ro.democaip.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import ro.democaip.domain.Project;
 import ro.democaip.service.ProjectService;
+import ro.democaip.service.UserService;
 import ro.democaip.web.rest.errors.BadRequestAlertException;
 import ro.democaip.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -30,9 +31,11 @@ public class ProjectResource {
     private static final String ENTITY_NAME = "project";
 
     private final ProjectService projectService;
+    private final UserService userService;
 
-    public ProjectResource(ProjectService projectService) {
+    public ProjectResource(ProjectService projectService, UserService userService) {
         this.projectService = projectService;
+        this.userService = userService;
     }
 
     /**
@@ -51,6 +54,7 @@ public class ProjectResource {
         }
 
         project.creation(LocalDate.now());
+        userService.getUserWithAuthorities().ifPresent(project::setOwner);
         Project result = projectService.save(project);
         return ResponseEntity.created(new URI("/api/projects/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -89,7 +93,13 @@ public class ProjectResource {
     public List<Project> getAllProjects() {
         log.debug("REST request to get all Projects");
         return projectService.findAll();
-        }
+    }
+
+    @GetMapping("/projectsByOwner")
+    @Timed
+    public List<Project> getAllByOwner() {
+        return projectService.getAllByOwner();
+    }
 
     /**
      * GET  /projects/:id : get the "id" project.

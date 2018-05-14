@@ -35,16 +35,18 @@
                 <td>{{task.description}}</td>
                 <td>{{task.creation | date:'mediumDate'}}</td>
                 <td>{{task.duration}}</td>
-                <td jhiTranslate="{{'democaipApp.TaskStatus.' + task.status}}">{{task.status}}</td>
+                <td *ngIf="task.status === 'OPEN'"><button class="btn btn-info btn-sm" jhiTranslate="{{'democaipApp.TaskStatus.' + task.status}}">{{task.status}}</button></td>
+                <td *ngIf="task.status === 'IN_PROGRES'"><button class="btn btn-primary btn-sm" jhiTranslate="{{'democaipApp.TaskStatus.' + task.status}}">{{task.status}}</button></td>
+                <td *ngIf="task.status === 'DONE'"><button class="btn btn-danger btn-sm" jhiTranslate="{{'democaipApp.TaskStatus.' + task.status}}">{{task.status}}</button></td>
                 <td>
-                    {{task.assigner?.id}}
+                    {{task.assigner?.login}}
                 </td>
                 <td>
-                    {{task.assignee?.id}}
+                    {{task.assignee?.login}}
                 </td>
                 <td>
                     <div *ngIf="task.story">
-                        <a [routerLink]="['../story', task.story?.id ]" >{{task.story?.id}}</a>
+                        <a [routerLink]="['../story', task.story?.id ]" >{{task.story?.name}}</a>
                     </div>
                 </td>
                 <td class="text-right">

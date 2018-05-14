@@ -5,6 +5,7 @@ import ro.democaip.DemocaipApp;
 import ro.democaip.domain.Task;
 import ro.democaip.repository.TaskRepository;
 import ro.democaip.service.TaskService;
+import ro.democaip.service.UserService;
 import ro.democaip.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -78,11 +79,13 @@ public class TaskResourceIntTest {
     private MockMvc restTaskMockMvc;
 
     private Task task;
+    @Autowired
+    private UserService userService;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final TaskResource taskResource = new TaskResource(taskService);
+        final TaskResource taskResource = new TaskResource(taskService, userService);
         this.restTaskMockMvc = MockMvcBuilders.standaloneSetup(taskResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

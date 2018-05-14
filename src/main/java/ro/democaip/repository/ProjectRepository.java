@@ -4,6 +4,8 @@ import ro.democaip.domain.Project;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
+import ro.democaip.domain.User;
+
 import java.util.List;
 
 /**
@@ -16,4 +18,5 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     @Query("select project from Project project where project.owner.login = ?#{principal.username}")
     List<Project> findByOwnerIsCurrentUser();
 
+    List<Project> getAllByOwner(User user);
 }

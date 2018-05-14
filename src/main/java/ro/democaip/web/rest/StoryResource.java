@@ -3,6 +3,7 @@ package ro.democaip.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import ro.democaip.domain.Story;
 import ro.democaip.service.StoryService;
+import ro.democaip.service.UserService;
 import ro.democaip.web.rest.errors.BadRequestAlertException;
 import ro.democaip.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,9 +31,11 @@ public class StoryResource {
     private static final String ENTITY_NAME = "story";
 
     private final StoryService storyService;
+    private final UserService userService;
 
-    public StoryResource(StoryService storyService) {
+    public StoryResource(StoryService storyService, UserService userService) {
         this.storyService = storyService;
+        this.userService = userService;
     }
 
     /**
@@ -48,6 +52,9 @@ public class StoryResource {
         if (story.getId() != null) {
             throw new BadRequestAlertException("A new story cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        story.creation(LocalDate.now());
+        userService.getUserWithAuthorities().ifPresent(story::setOwner);
+
         Story result = storyService.save(story);
         return ResponseEntity.created(new URI("/api/stories/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

@@ -34,11 +34,11 @@
                 <td>{{epic.creation | date:'mediumDate'}}</td>
                 <td jhiTranslate="{{'democaipApp.EpicSize.' + epic.size}}">{{epic.size}}</td>
                 <td>
-                    {{epic.owner?.id}}
+                    {{epic.owner?.login}}
                 </td>
                 <td>
                     <div *ngIf="epic.project">
-                        <a [routerLink]="['../project', epic.project?.id ]" >{{epic.project?.id}}</a>
+                        <a [routerLink]="['../project', epic.project?.id ]" >{{epic.project?.name}}</a>
                     </div>
                 </td>
                 <td class="text-right">

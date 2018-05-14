@@ -23,16 +23,6 @@
                 [(ngModel)]="epic.description" />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="democaipApp.epic.creation" for="field_creation">Creation</label>
-            <div class="input-group">
-                <input id="field_creation" type="text" class="form-control" name="creation" ngbDatepicker  #creationDp="ngbDatepicker" [(ngModel)]="epic.creation"
-                />
-                <span class="input-group-append">
-                    <button type="button" class="btn btn-secondary" (click)="creationDp.toggle()"><i class="fa fa-calendar"></i></button>
-                </span>
-            </div>
-        </div>
-        <div class="form-group">
             <label class="form-control-label" jhiTranslate="democaipApp.epic.size" for="field_size">Size</label>
             <select class="form-control" name="size" [(ngModel)]="epic.size" id="field_size" >
                 <option value="XXS">{{'democaipApp.EpicSize.XXS' | translate}}</option>
@@ -46,17 +36,10 @@
         </div>
 
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="democaipApp.epic.owner" for="field_owner">Owner</label>
-            <select class="form-control" id="field_owner" name="owner" [(ngModel)]="epic.owner" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="userOption.id === epic.owner?.id ? epic.owner : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
-            </select>
-        </div>
-        <div class="form-group">
             <label class="form-control-label" jhiTranslate="democaipApp.epic.project" for="field_project">Project</label>
             <select class="form-control" id="field_project" name="project" [(ngModel)]="epic.project" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="projectOption.id === epic.project?.id ? epic.project : projectOption" *ngFor="let projectOption of projects; trackBy: trackProjectById">{{projectOption.id}}</option>
+                <option [ngValue]="projectOption.id === epic.project?.id ? epic.project : projectOption" *ngFor="let projectOption of projects; trackBy: trackProjectById">{{projectOption.name}}</option>
             </select>
         </div>
     </div>

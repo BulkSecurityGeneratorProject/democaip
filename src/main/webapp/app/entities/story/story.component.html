@@ -34,11 +34,11 @@
                 <td>{{story.creation | date:'mediumDate'}}</td>
                 <td>{{story.storyPoint}}</td>
                 <td>
-                    {{story.owner?.id}}
+                    {{story.owner?.login}}
                 </td>
                 <td>
                     <div *ngIf="story.epic">
-                        <a [routerLink]="['../epic', story.epic?.id ]" >{{story.epic?.id}}</a>
+                        <a [routerLink]="['../epic', story.epic?.id ]" >{{story.epic?.name}}</a>
                     </div>
                 </td>
                 <td class="text-right">

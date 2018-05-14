@@ -13,7 +13,8 @@ export type EntityResponseType = HttpResponse<Project>;
 @Injectable()
 export class ProjectService {
 
-    private resourceUrl =  SERVER_API_URL + 'api/projects';
+    private resourceUrlByOwner = SERVER_API_URL + 'api/projectsByOwner';
+    private resourceUrl = SERVER_API_URL + 'api/projects';
 
     constructor(private http: HttpClient, private dateUtils: JhiDateUtils) { }
 
@@ -37,6 +38,11 @@ export class ProjectService {
     query(req?: any): Observable<HttpResponse<Project[]>> {
         const options = createRequestOption(req);
         return this.http.get<Project[]>(this.resourceUrl, { params: options, observe: 'response' })
+            .map((res: HttpResponse<Project[]>) => this.convertArrayResponse(res));
+    }
+
+    findByOwner(): Observable<HttpResponse<Project[]>> {
+        return this.http.get<Project[]>(this.resourceUrlByOwner, {observe: 'response'})
             .map((res: HttpResponse<Project[]>) => this.convertArrayResponse(res));
     }
 

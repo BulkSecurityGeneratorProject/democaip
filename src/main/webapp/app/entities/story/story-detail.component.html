@@ -22,12 +22,12 @@
         </dd>
         <dt><span jhiTranslate="democaipApp.story.owner">Owner</span></dt>
         <dd>
-            {{story.owner?.id}}
+            {{story.owner?.login}}
         </dd>
         <dt><span jhiTranslate="democaipApp.story.epic">Epic</span></dt>
         <dd>
             <div *ngIf="story.epic">
-                <a [routerLink]="['/epic', story.epic?.id]">{{story.epic?.id}}</a>
+                <a [routerLink]="['/epic', story.epic?.id]">{{story.epic?.name}}</a>
             </div>
         </dd>
     </dl>
