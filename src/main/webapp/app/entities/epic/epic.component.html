@@ -32,7 +32,13 @@
                 <td>{{epic.name}}</td>
                 <td>{{epic.description}}</td>
                 <td>{{epic.creation | date:'mediumDate'}}</td>
-                <td jhiTranslate="{{'democaipApp.EpicSize.' + epic.size}}">{{epic.size}}</td>
+                <td *ngIf="epic.size === 'XXS'"> <button class="btn btn-primary" jhiTranslate="{{'democaipApp.EpicSize.' + epic.size}}">{{epic.size}}</button></td>
+                <td *ngIf="epic.size === 'XS'"> <button class="btn btn-info" jhiTranslate="{{'democaipApp.EpicSize.' + epic.size}}">{{epic.size}}</button></td>
+                <td *ngIf="epic.size === 'S'"> <button class="btn btn-success" jhiTranslate="{{'democaipApp.EpicSize.' + epic.size}}">{{epic.size}}</button></td>
+                <td *ngIf="epic.size === 'M'"> <button class="btn btn-secondary" jhiTranslate="{{'democaipApp.EpicSize.' + epic.size}}">{{epic.size}}</button></td>
+                <td *ngIf="epic.size === 'L'"> <button class="btn btn-warning" jhiTranslate="{{'democaipApp.EpicSize.' + epic.size}}">{{epic.size}}</button></td>
+                <td *ngIf="epic.size === 'XL'"> <button class="btn btn-danger" jhiTranslate="{{'democaipApp.EpicSize.' + epic.size}}">{{epic.size}}</button></td>
+                <td *ngIf="epic.size === 'XXL'"> <button class="btn btn-dark" jhiTranslate="{{'democaipApp.EpicSize.' + epic.size}}">{{epic.size}}</button></td>
                 <td>
                     {{epic.owner?.login}}
                 </td>
